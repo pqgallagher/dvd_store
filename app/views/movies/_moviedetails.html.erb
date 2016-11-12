@@ -1,0 +1,18 @@
+<div class="movie">
+  <p>
+    <%= moviedetails.title %>
+  </p>
+
+  <p>
+    <%= moviedetails.genre %>
+  </p>
+
+  <% if moviedetails.picture.present? %>
+    <p>
+      <%= image_tag(moviedetails.picture) %>
+    </p>
+  <% end %>
+
+  <p><%= moviedetails.content%></p>
+
+</div>
