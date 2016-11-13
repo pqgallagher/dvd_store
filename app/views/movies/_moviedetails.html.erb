@@ -3,6 +3,14 @@
     <%= moviedetails.title %>
   </p>
 
+  <p>
+    <% if moviedetails.category.present?%>
+      <%= moviedetails.category.name%>
+    <% else %>
+      Category Unset
+    <% end %>
+  </p>
+
   <% if moviedetails.picture.present? %>
     <p>
       <%= image_tag(moviedetails.picture) %>
