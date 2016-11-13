@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112034705) do
+ActiveRecord::Schema.define(version: 20161113003300) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -43,6 +43,12 @@ ActiveRecord::Schema.define(version: 20161112034705) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "movies", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
@@ -52,6 +58,8 @@ ActiveRecord::Schema.define(version: 20161112034705) do
     t.datetime "updated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "id_id"
+    t.index ["id_id"], name: "index_movies_on_id_id"
   end
 
 end
