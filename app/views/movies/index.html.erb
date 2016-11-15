@@ -1,5 +1,6 @@
 <% if @movies_in_cart.any?  %>
   <h3>Cart</h3>
+  <p><%= link_to 'Remove All', remove_all_movies_path, method: :post %></p>
   <%= render partial: 'movie', collection: @movies_in_cart %>
 <% end %>
 

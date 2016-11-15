@@ -1,6 +1,10 @@
 <div class="movie">
   <p>
     <strong>Name: </strong><%= link_to movie.title, movie_path(movie) %>
-    <%= link_to 'Add to Cart', add_to_cart_movie_path(movie),method: :post %>
+    <% if @movies_in_cart.include?(movie) %>
+      <%= link_to 'Remove From Cart', remove_from_cart_movie_path(movie),method: :post %>
+    <% else %>
+      <%= link_to 'Add to Cart', add_to_cart_movie_path(movie),method: :post %>
+    <% end %>
   </p>
 </div>

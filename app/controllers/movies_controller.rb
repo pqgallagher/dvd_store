@@ -18,6 +18,15 @@ class MoviesController < ApplicationController
   end
 
   def remove_from_cart
+    id = params[:id].to_i
+    session[:movies_in_cart].delete(id)
+
+    redirect_to index_path
+  end
+
+  def remove_all
+    session[:movies_in_cart] = []
+    redirect_to index_path
   end
 
   private
