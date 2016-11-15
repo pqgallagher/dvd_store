@@ -1,5 +1,6 @@
 <div class="movie">
   <p>
     <strong>Name: </strong><%= link_to movie.title, movie_path(movie) %>
+    <%= link_to 'Add to Cart', add_to_cart_movie_path(movie),method: :post %>
   </p>
 </div>
