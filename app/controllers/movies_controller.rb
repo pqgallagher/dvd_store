@@ -4,6 +4,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.order(:title)
+    # categories = Category.all
   end
 
   def show

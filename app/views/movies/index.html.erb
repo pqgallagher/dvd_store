@@ -1,8 +1,15 @@
 <% if @movies_in_cart.any?  %>
   <h3>Cart</h3>
-  <p><%= link_to 'Remove All', remove_all_movies_path, method: :post %></p>
   <%= render partial: 'movie', collection: @movies_in_cart %>
+  <p><%= link_to 'Remove All', remove_all_movies_path, method: :post %></p>
 <% end %>
 
 <h2>All Movies</h2>
+
+<select>
+  <%= Category.all.each do |c| %>
+    <option value="<%=c.id%>"><%=c.name%></option>
+  <% end %>
+</select><br><br>
+
 <%= render partial: 'movie', collection: @movies %>
