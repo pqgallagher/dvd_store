@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.order(:title)
-    # @categories = Category.all
+    @categories = Category.all
   end
 
   def show
@@ -31,6 +31,10 @@ class MoviesController < ApplicationController
   end
 
   def sort
+    id = params[:sort_id].to_i
+    @movies = Movie.order(id)
+
+    redirect_to index_path
   end
 
   private

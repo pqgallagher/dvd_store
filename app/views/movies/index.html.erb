@@ -2,12 +2,16 @@
   <h3>Cart</h3>
   <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
   <div class="card-group">
-    <%= render partial: 'movie', collection: @movies_in_cart %>
-
+    <%= render partial: 'cart', collection: @movies_in_cart %>
   </div>
 <% end %>
 
 <h2>All Movies</h2>
+
+<%= form_tag sort_movie_path(@categories) do |c|%>
+   <%= select_tag :sort_id, options_from_collection_for_select(@categories, :id, :name) %>
+   <%= submit_tag "Sort" %>
+<% end %>
 
 <div class="card-deck-wrapper">
   <div class="card-deck">
