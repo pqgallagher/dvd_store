@@ -3,8 +3,14 @@ class MoviesController < ApplicationController
   before_action :load_movies_in_cart, only: [:index]
 
   def index
-    @movies = Movie.order(:title)
+
     @categories = Category.all
+
+    if session[:sort].present?
+      @movies = Movie.where(category_id: session[:sort])
+    else
+      @movies = Movie.order(:title)
+    end
   end
 
   def show
@@ -32,8 +38,13 @@ class MoviesController < ApplicationController
 
   def sort
     id = params[:sort_id].to_i
-    @movies = Movie.order(id)
+    session[:sort] = id
 
+    redirect_to index_path
+  end
+
+  def show_all
+    session[:sort] = []
     redirect_to index_path
   end
 
@@ -48,6 +59,7 @@ class MoviesController < ApplicationController
 
   def initialize_session
     session[:movies_in_cart] ||= []
+    session[:sort] ||= []
   end
 
   def load_movies_in_cart

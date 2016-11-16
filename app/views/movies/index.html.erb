@@ -12,6 +12,8 @@
    <%= select_tag :sort_id, options_from_collection_for_select(@categories, :id, :name) %>
    <%= submit_tag "Sort" %>
 <% end %>
+<%= button_to 'Show All', show_all_movies_path, method: :post %>
+
 
 <div class="card-deck-wrapper">
   <div class="card-deck">
