@@ -30,9 +30,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Active Admin Gems
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise'
+
+# Bootstrap Gem
+gem 'bootstrap', '~> 4.0.0.alpha5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
