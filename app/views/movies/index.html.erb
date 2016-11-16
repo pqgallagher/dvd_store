@@ -1,10 +1,16 @@
 <% if @movies_in_cart.any?  %>
   <h3>Cart</h3>
-  <%= render partial: 'movie', collection: @movies_in_cart %>
-  <p><%= link_to 'Remove All', remove_all_movies_path, method: :post %></p>
+  <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
+  <div class="card-group">
+    <%= render partial: 'movie', collection: @movies_in_cart %>
+
+  </div>
 <% end %>
 
 <h2>All Movies</h2>
 
-
-<%= render partial: 'movie', collection: @movies %>
+<div class="card-deck-wrapper">
+  <div class="card-deck">
+    <%= render partial: 'movie', collection: @movies %>
+  </div>
+</div>
