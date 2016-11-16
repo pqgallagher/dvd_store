@@ -36,7 +36,12 @@ class MoviesController < ApplicationController
     redirect_to index_path
   end
 
+  def sort
+    id = params[:sort_id].to_i
+    session[:sort] = id
 
+    redirect_to index_path
+  end
 
   def show_all
     session[:sort] = []
