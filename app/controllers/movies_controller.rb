@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.order(:title)
-    # categories = Category.all
+    # @categories = Category.all
   end
 
   def show
@@ -28,6 +28,9 @@ class MoviesController < ApplicationController
   def remove_all
     session[:movies_in_cart] = []
     redirect_to index_path
+  end
+
+  def sort
   end
 
   private

@@ -6,10 +6,5 @@
 
 <h2>All Movies</h2>
 
-<select>
-  <%= Category.all.each do |c| %>
-    <option value="<%=c.id%>"><%=c.name%></option>
-  <% end %>
-</select><br><br>
 
 <%= render partial: 'movie', collection: @movies %>
