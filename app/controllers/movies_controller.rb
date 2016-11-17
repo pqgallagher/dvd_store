@@ -3,7 +3,6 @@ class MoviesController < ApplicationController
   before_action :load_movies_in_cart, only: [:index]
 
   def index
-
     @categories = Category.all
 
     if session[:sort].present?
