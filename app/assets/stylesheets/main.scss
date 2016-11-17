@@ -1,9 +1,10 @@
 @import "bootstrap";
 
-img.img-details
+/*--------------------------INDEX--BEGIN------------------------*/
+img.img-index
 {
-  height: 500px;
-  width: auto;
+  height: auto;
+  width: 250px;
 }
 
 select.index-nav-drop
@@ -12,7 +13,6 @@ select.index-nav-drop
   background-image: none;
   background-color: transparent;
   border-color: #ccc;
-
   display: inline-block;
   font-weight: normal;
   line-height: 1.25;
@@ -29,6 +29,7 @@ select.index-nav-drop
   font-size: 1rem;
   border-radius: 0.25rem;
 }
+
 select.index-nav-drop:hover
 {
   background-color: #ccc;
@@ -40,3 +41,13 @@ option
 {
   color: black;
 }
+/*--------------------------INDEX--END--------------------------*/
+
+
+/*--------------------------SHOW--BEGIN-------------------------*/
+img.img-details
+{
+  height: 500px;
+  width: auto;
+}
+/*--------------------------SHOW--END---------------------------*/

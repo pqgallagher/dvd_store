@@ -8,6 +8,8 @@ class MoviesController < ApplicationController
 
     if session[:sort].present?
       @movies = Movie.where(category_id: session[:sort])
+    elsif session[:search].present?
+      @movies = Movie.where(title: session[:search])
     else
       @movies = Movie.order(:title)
     end
@@ -39,13 +41,25 @@ class MoviesController < ApplicationController
   def sort
     id = params[:sort_id].to_i
     session[:sort] = id
+    session[:search] = []
 
     redirect_to index_path
   end
 
   def show_all
     session[:sort] = []
+    session[:search] = []
+
     redirect_to index_path
+  end
+
+  def search
+    name = params[:search_name]
+    session[:search] = name
+    session[:sort] = []
+
+    redirect_to index_path
+
   end
 
   private
@@ -60,6 +74,7 @@ class MoviesController < ApplicationController
   def initialize_session
     session[:movies_in_cart] ||= []
     session[:sort] ||= []
+    session[:search] ||= []
   end
 
   def load_movies_in_cart

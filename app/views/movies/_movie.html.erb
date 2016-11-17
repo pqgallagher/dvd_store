@@ -2,7 +2,7 @@
   <div class="card-block">
     <h4 class="card-title"><%= link_to movie.title, movie_path(movie) %></h4>
   </div>
-  <%= image_tag movie.picture, class: 'card-img-top img-fluid mx-auto d-block' %>
+  <%= image_tag movie.picture, class: 'card-img-top img-fluid d-block img-index img-thumbnail' %>
   <div class="card-block">
     <% if @movies_in_cart.include?(movie) %>
       <%= link_to 'Remove From Cart', remove_from_cart_movie_path(movie),method: :post, class: 'card-link' %>
