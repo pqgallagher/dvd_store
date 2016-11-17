@@ -1,10 +1,21 @@
 @import "bootstrap";
+/*--------------------APPLICATION.HTML.ERB--BEGIN---------------*/
+body
+{
+  background-color: #585858;
+}
+/*--------------------APPLICATION.HTML.ERB--END-----------------*/
 
 /*--------------------------INDEX--BEGIN------------------------*/
+div.index
+{
+  // background-color: #373a3c;
+}
 img.img-index
 {
-  height: auto;
+  height: 375px;
   width: 250px;
+  object-fit: cover;
 }
 
 select.index-nav-drop
