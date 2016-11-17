@@ -6,16 +6,16 @@ Rails.application.routes.draw do
   root 'movies#index', as: 'index'
   get 'movies/:id' => 'movies#show', as: 'movie', id: /\d+/
 
-  # get 'movies/:id' => 'movies#index', as: 'sort', id: /\d+/
-  # post :sort
-
   resources :movies, only: [:index] do
     member do
       post :add_to_cart
       post :remove_from_cart
+      post :sort
+      post :search
     end
     collection do
       post :remove_all
+      post :show_all
     end
   end
 
