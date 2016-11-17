@@ -5,3 +5,38 @@ img.img-details
   height: 500px;
   width: auto;
 }
+
+select.index-nav-drop
+{
+  color: #ccc;
+  background-image: none;
+  background-color: transparent;
+  border-color: #ccc;
+
+  display: inline-block;
+  font-weight: normal;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+}
+select.index-nav-drop:hover
+{
+  background-color: #ccc;
+  border-color: #ccc;
+  color: white;
+}
+
+option
+{
+  color: black;
+}
