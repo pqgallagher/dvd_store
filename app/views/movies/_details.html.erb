@@ -4,12 +4,9 @@
   <div class="card-block">
     <h4 class="card-title"><%= details.title %></h4>
   </div>
-
   <% if details.picture.present? %>
     <%= image_tag details.picture, class: 'img-details' %>
   <% end %>
-
-
   <div class="card-block">
     <% if details.category.present?%>
       <%= details.category.name%>
@@ -20,7 +17,6 @@
   <div class="card-block">
     <p class="card-text"><%= details.content%></p>
   </div>
-
   <div class="card-block">
     <%= link_to 'Back to All Movies', index_path, class: 'card-link' %>
   </div>
