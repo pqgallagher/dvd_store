@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
     if session[:sort].present?
       @movies = Movie.where(category_id: session[:sort])
     elsif session[:search].present?
-      @movies = Movie.where(title: session[:search])
+      @movies = Movie.where("title LIKE ?", "%"+session[:search]+"%")
     else
       @movies = Movie.order(:title)
     end
