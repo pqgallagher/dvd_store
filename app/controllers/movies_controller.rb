@@ -4,15 +4,21 @@ class MoviesController < ApplicationController
 
   def index
     @categories = Category.all
+    @sale_new = ['New', 'Sale']
 
     if session[:sort].present?
       @movies = Movie.where(category_id: session[:sort])
     elsif session[:search].present?
       @movies = Movie.where("title LIKE ?", "%"+session[:search]+"%")
+    elsif session[:sale_new].present?
+      if session[:sale_new] == 'New'
+        @movies = Movie.where(sale: true)
+      else
+        @movies = Movie.where(new: true)
+      end
+
     else
       @movies = Movie.order(:title)
-      # @movies = Movie.where(sale: true)
-      # @movies = Movie.where(new: true)
     end
   end
 
@@ -50,6 +56,7 @@ class MoviesController < ApplicationController
   def show_all
     session[:sort] = []
     session[:search] = []
+    session[:sale_new] = []
 
     redirect_to index_path
   end
@@ -58,9 +65,18 @@ class MoviesController < ApplicationController
     name = params[:search_name]
     session[:search] = name
     session[:sort] = []
+    session[:sale_new] = []
 
     redirect_to index_path
+  end
 
+  def sale_new
+    selection = params[:sale_new_id].to_s
+    session[:sale_new] = selection
+    session[:sort] = []
+    session[:search] = []
+
+    redirect_to index_path
   end
 
   private
@@ -76,6 +92,7 @@ class MoviesController < ApplicationController
     session[:movies_in_cart] ||= []
     session[:sort] ||= []
     session[:search] ||= []
+    session[:sale_new] ||= []
   end
 
   def load_movies_in_cart
