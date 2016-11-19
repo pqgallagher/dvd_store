@@ -4,11 +4,17 @@
   </div>
   <%= image_tag movie.picture, class: 'card-img-top img-fluid d-block img-index img-thumbnail' %>
   <div class="card-block">
-    <p class="card-text">$<%= movie.price %></p>
+    <p class="card-text">
+      $<%= movie.price %>
+      <% if movie.sale %>
+        <strong>Sale</strong>
+      <% end %>
+    </p>
+
     <% if @movies_in_cart.include?(movie) %>
-      <%= link_to 'Remove From Cart', remove_from_cart_movie_path(movie),method: :post, class: 'card-link' %>
+      <%= link_to 'Remove From Cart', remove_from_cart_movie_path(movie),method: :post, class: 'card-outline-secondary' %>
     <% else %>
-      <%= link_to 'Add to Cart', add_to_cart_movie_path(movie),method: :post, class: 'card-link' %>
+      <%= link_to 'Add to Cart', add_to_cart_movie_path(movie),method: :post, class: 'btn btn-primary' %>
     <% end %>
   </div>
 </div>
