@@ -4,6 +4,7 @@
   </div>
   <%= image_tag movie.picture, class: 'card-img-top img-fluid d-block img-index img-thumbnail' %>
   <div class="card-block">
+    <p class="card-text">$<%= movie.price %></p>
     <% if @movies_in_cart.include?(movie) %>
       <%= link_to 'Remove From Cart', remove_from_cart_movie_path(movie),method: :post, class: 'card-link' %>
     <% else %>
