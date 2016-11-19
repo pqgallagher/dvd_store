@@ -11,6 +11,8 @@ class MoviesController < ApplicationController
       @movies = Movie.where("title LIKE ?", "%"+session[:search]+"%")
     else
       @movies = Movie.order(:title)
+      # @movies = Movie.where(sale: true)
+      # @movies = Movie.where(new: true)
     end
   end
 
