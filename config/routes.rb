@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post :remove_from_cart
       post :sort
       post :search
+      post :sale_new
     end
     collection do
       post :remove_all
