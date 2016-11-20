@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
     elsif session[:search].present?
       @movies = Movie.where("title LIKE ?", "%"+session[:search]+"%")
     elsif session[:sale_new].present?
-      if session[:sale_new] == 'New'
+      if session[:sale_new] == 'Sale'
         @movies = Movie.where(sale: true)
       else
         @movies = Movie.where(new: true)
