@@ -28,8 +28,9 @@ class MoviesController < ApplicationController
 
   def add_to_cart
    id = params[:id].to_i
+   quantity = params[:quantity_selection].to_i
    session[:movies_in_cart][0] << id unless session[:movies_in_cart][0].include?(id)
-   session[:movies_in_cart][1] << 1
+   session[:movies_in_cart][1] << quantity
 
    redirect_to index_path
   end

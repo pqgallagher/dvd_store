@@ -5,11 +5,12 @@
     <p class="card-text">Quantity:  <%= quantity[x] %></p>
   </div>
   <div class="card-block">
-    <% if @movies_in_cart.include?(item) %>
-      <%= link_to 'Remove From Cart', remove_from_cart_movie_path(item),method: :post, class: 'card-link' %>
-    <% else %>
-      <%= link_to 'Add to Cart', add_to_cart_movie_path(item),method: :post, class: 'card-link' %>
-    <% end %>
+    <%= form_tag update_quantity_movie_path(item)do %>
+      <%= label_tag 'Quantity', nil, class: 'quantity' %>
+      <%= text_field_tag :quantity_update, nil, class: 'quantity', placeholder: quantity[x] %>
+      <%= submit_tag "Update", class: 'btn btn-primary' %>
+    <% end %><br>
+    <%= link_to 'Remove From Cart', remove_from_cart_movie_path(item),method: :post, class: 'card-link' %>
   </div>
 </div>
 <% end %>

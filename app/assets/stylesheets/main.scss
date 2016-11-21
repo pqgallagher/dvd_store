@@ -116,3 +116,24 @@ img.img-details
   width: auto;
 }
 /*--------------------------SHOW--END---------------------------*/
+
+/*--------------------------CART--BEGIN-------------------------*/
+
+label,input.quantity
+{
+  display: inline-block;
+  vertical-align: middle;
+
+  width: 42px;
+
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: black;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+/*--------------------------CART--END---------------------------*/

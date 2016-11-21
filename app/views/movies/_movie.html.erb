@@ -20,7 +20,11 @@
     <% if @movies_in_cart.include?(movie) %>
       <%= link_to 'Remove From Cart', remove_from_cart_movie_path(movie),method: :post, class: 'card-outline-secondary' %>
     <% else %>
-      <%= link_to 'Add to Cart', add_to_cart_movie_path(movie),method: :post, class: 'btn btn-primary' %>
+      <%= form_tag add_to_cart_movie_path(movie), class: 'form-inline' do %>
+        <%= label_tag 'Quantity' %>
+        <%= select_tag :quantity_selection, options_for_select(Array(1..10)), class: ''  %>
+        <%= submit_tag "Add to Cart", class: 'btn btn-primary' %>
+      <% end %>
     <% end %>
   </div>
 </div>
