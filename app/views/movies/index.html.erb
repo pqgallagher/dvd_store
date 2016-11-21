@@ -41,7 +41,11 @@
 
 
 <div class="card-deck-wrapper">
-  <div class="card-deck">
-    <%= render partial: 'movie', collection: @movies %>
-  </div>
+  <!-- <div class="card-deck"> -->
+    <% @movies.in_groups_of(4) do |movie| %>
+      <div class="card-deck">
+        <%= render partial: 'movie', collection: @movies  %>
+      </div>
+    <% end %>
+  <!-- </div> -->
 </div>
