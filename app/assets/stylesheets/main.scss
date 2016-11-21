@@ -7,6 +7,14 @@ body
 /*--------------------APPLICATION.HTML.ERB--END-----------------*/
 
 /*--------------------------INDEX--BEGIN------------------------*/
+div.index-cart
+{
+  color: #ccc;
+  background-color: #373a3c;
+  margin-bottom: 0px;
+  padding-left: 13px;
+}
+
 img.img-index
 {
   height: 375px;

@@ -1,8 +1,11 @@
 <% if @movies_in_cart.any?  %>
-  <h3>Cart</h3>
-  <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
+  <div class="card index-cart">
+
+    <h3>Cart</h3>
+      <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
+  </div>
   <div class="card-group">
-    <%= render partial: 'cart', collection: @movies_in_cart %>
+    <%= render partial: 'cart', locals: {cart: @movies_in_cart, quantity: session[:movies_in_cart][1]}  %>
   </div>
 <% end %>
 <nav class="navbar navbar-dark bg-inverse">

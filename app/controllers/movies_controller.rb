@@ -28,20 +28,25 @@ class MoviesController < ApplicationController
 
   def add_to_cart
    id = params[:id].to_i
-   session[:movies_in_cart] << id unless session[:movies_in_cart].include?(id)
+   session[:movies_in_cart][0] << id unless session[:movies_in_cart][0].include?(id)
+   session[:movies_in_cart][1] << 1
 
    redirect_to index_path
   end
 
   def remove_from_cart
     id = params[:id].to_i
-    session[:movies_in_cart].delete(id)
+    index = session[:movies_in_cart][0].index(id)
+
+    session[:movies_in_cart][0].delete(id)
+    session[:movies_in_cart][1].delete_at(index)
 
     redirect_to index_path
   end
 
   def remove_all
-    session[:movies_in_cart] = []
+    session[:movies_in_cart][0] = []
+    session[:movies_in_cart][1] = []
     redirect_to index_path
   end
 
@@ -89,14 +94,16 @@ class MoviesController < ApplicationController
   end
 
   def initialize_session
-    session[:movies_in_cart] ||= []
+    #session[:movies_in_cart] ||= []
+    session[:movies_in_cart] ||= Array.new(2) { Array.new() }
+
     session[:sort] ||= []
     session[:search] ||= []
     session[:sale_new] ||= []
   end
 
   def load_movies_in_cart
-    @movies_in_cart = Movie.find(session[:movies_in_cart])
+    @movies_in_cart = Movie.find(session[:movies_in_cart][0])
   end
 
 end
