@@ -22,7 +22,7 @@
     <% else %>
       <%= form_tag add_to_cart_movie_path(movie), class: 'form-inline' do %>
         <%= label_tag 'Quantity' %>
-        <%= select_tag :quantity_selection, options_for_select(Array(1..10)), class: ''  %>
+        <%= select_tag :quantity_selection, options_for_select(Array(1..10)), class: ''  %><br>
         <%= submit_tag "Add to Cart", class: 'btn btn-primary' %>
       <% end %>
     <% end %>

@@ -103,9 +103,7 @@ class MoviesController < ApplicationController
   end
 
   def initialize_session
-    #session[:movies_in_cart] ||= []
     session[:movies_in_cart] ||= Array.new(2) { Array.new() }
-
     session[:sort] ||= []
     session[:search] ||= []
     session[:sale_new] ||= []
