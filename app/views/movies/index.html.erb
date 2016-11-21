@@ -13,10 +13,7 @@
   <div class="collapse navbar-toggleable-md" id="navbarResponsive">
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <%= form_tag sort_movie_path(@categories) do %>
-           <%= select_tag :sort_id, options_from_collection_for_select(@categories, :id, :name), class: 'index-nav-drop' %>
-           <%= submit_tag "Sort", class: 'btn btn-outline-secondary' %>
-        <% end %>
+        <%= button_to 'Show All', show_all_movies_path, method: :post, class: 'btn btn-outline-secondary' %>
       </li>
       <li class="nav-item">
         <%= form_tag sale_new_movie_path(@movies) do %>
@@ -24,12 +21,12 @@
           <%= submit_tag "Sort", class: 'btn btn-outline-secondary'  %>
         <% end %>
       </li>
-      <li class="nav-item">
-        <%= button_to 'Show All', show_all_movies_path, method: :post, class: 'btn btn-outline-secondary' %>
-      </li>
+
     </ul>
     <div class='float-lg-right'>
       <%= form_tag search_movie_path(@movies), class: 'form-inline' do %>
+        <%= select_tag :sort_id, options_from_collection_for_select(@categories, :id, :name), class: 'index-nav-drop', :include_blank => 'Genre'%>
+        <%= submit_tag "Sort", class: 'btn btn-outline-secondary'  %>
         <%= text_field_tag :search_name, nil, class: 'form-control', placeholder: 'Search' %>
         <%= submit_tag "Search", class: 'btn btn-outline-success' %>
       <% end %>
