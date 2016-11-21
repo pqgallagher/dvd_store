@@ -35,6 +35,14 @@ class MoviesController < ApplicationController
    redirect_to index_path
   end
 
+  def update_quantity
+    quantity = params[:quantity_update].to_i
+    index = session[:movies_in_cart][0].index(params[:id].to_i)
+
+    session[:movies_in_cart][1][index] = quantity
+    redirect_to index_path
+  end
+
   def remove_from_cart
     id = params[:id].to_i
     index = session[:movies_in_cart][0].index(id)

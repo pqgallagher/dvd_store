@@ -118,21 +118,34 @@ img.img-details
 /*--------------------------SHOW--END---------------------------*/
 
 /*--------------------------CART--BEGIN-------------------------*/
-
-label,input.quantity
+label.quantity
 {
-  display: inline-block;
+  // display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 0px;
+  line-height: 1.25;
+  padding: 0.5rem 0.75rem;
+  // font-size: 1rem;
+  // background-image: none;
+  // background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+input.quantity
+{
+  // display: inline-block;
   vertical-align: middle;
 
   width: 42px;
 
   padding: 0.5rem 0.75rem;
-  font-size: 1rem;
+  // font-size: 1rem;
   line-height: 1.25;
   color: black;
-  background-color: #fff;
-  background-image: none;
-  background-clip: padding-box;
+  // background-color: #fff;
+  // background-image: none;
+  // background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
