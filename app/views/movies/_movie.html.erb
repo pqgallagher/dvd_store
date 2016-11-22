@@ -1,5 +1,6 @@
 <% movies.each_with_index do |movie, x| %>
   <div class="card">
+    <%= image_tag movie.picture, class: 'card-img-top img-fluid d-block img-index img-thumbnail' %>
     <div class="card-block">
       <h5 class="card-title">
         <%= link_to movie.title, movie_path(movie) %>
@@ -10,7 +11,6 @@
         <% end %>
       </h5>
     </div>
-    <%= image_tag movie.picture, class: 'card-img-top img-fluid d-block img-index img-thumbnail' %>
     <div class="card-block">
       <p class="card-text">
         $<%= movie.price %>
