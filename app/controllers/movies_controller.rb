@@ -20,6 +20,7 @@ class MoviesController < ApplicationController
       end
     else
       @movies = Movie.order(:title)
+      #@movies = Movie.first
     end
   end
 
