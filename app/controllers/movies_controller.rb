@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   before_action :initialize_session
-  before_action :load_movies_in_cart, only: [:index]
+  before_action :load, only: [:index]
 
   def index
     @categories = Category.all
@@ -20,7 +20,6 @@ class MoviesController < ApplicationController
       end
     else
       @movies = Movie.order(:title)
-      #@movies = Movie.first
     end
   end
 
@@ -28,20 +27,33 @@ class MoviesController < ApplicationController
     @movie = find_movie
   end
 
+  def sum_session(amount)
+    total = 0
+    amount.each do |num|
+      total += num.to_f
+    end
+    return total
+  end
+
   def add_to_cart
    id = params[:id].to_i
    quantity = params[:quantity_selection].to_i
+   amount = find_movie.price * quantity
+
    session[:movies_in_cart][0] << id unless session[:movies_in_cart][0].include?(id)
    session[:movies_in_cart][1] << quantity
+   session[:subtotal] <<  amount
 
    redirect_to index_path
   end
 
   def update_quantity
     quantity = params[:quantity_update].to_i
+    amount = find_movie.price * quantity
     index = session[:movies_in_cart][0].index(params[:id].to_i)
 
     session[:movies_in_cart][1][index] = quantity
+    session[:subtotal][index] = amount
     redirect_to index_path
   end
 
@@ -51,6 +63,7 @@ class MoviesController < ApplicationController
 
     session[:movies_in_cart][0].delete(id)
     session[:movies_in_cart][1].delete_at(index)
+    session[:subtotal].delete_at(index)
 
     redirect_to index_path
   end
@@ -58,16 +71,9 @@ class MoviesController < ApplicationController
   def remove_all
     session[:movies_in_cart][0] = []
     session[:movies_in_cart][1] = []
+    session[:subtotal] = []
     redirect_to index_path
   end
-
-  # def sort
-  #   id = params[:sort_id].to_i
-  #   session[:sort] = id
-  #   session[:search] = []
-  #
-  #   redirect_to index_path
-  # end
 
   def show_all
     session[:sort] = []
@@ -116,10 +122,12 @@ class MoviesController < ApplicationController
     session[:sort] ||= []
     session[:search] ||= []
     session[:sale_new] ||= []
+    session[:subtotal] ||= []
   end
 
-  def load_movies_in_cart
+  def load
     @movies_in_cart = Movie.find(session[:movies_in_cart][0])
+    @subtotal = sum_session(session[:subtotal])
   end
 
 end
