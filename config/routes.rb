@@ -13,10 +13,12 @@ Rails.application.routes.draw do
       post :update_quantity
       post :search
       post :sale_new
+
     end
     collection do
       post :remove_all
       post :show_all
+      post :set_pst
     end
   end
 
