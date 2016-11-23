@@ -127,7 +127,7 @@ class MoviesController < ApplicationController
 
   def load
     @movies_in_cart = Movie.find(session[:movies_in_cart][0])
-    @subtotal = sum_session(session[:subtotal])
+    @subtotal = sum_session(session[:subtotal]).round(2)
   end
 
 end
