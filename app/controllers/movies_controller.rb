@@ -5,6 +5,9 @@ class MoviesController < ApplicationController
   def index
     @categories = Category.all
     @sale_new = ['New', 'Sale']
+    @sales_tax_by_province = { 'AB' => 0, 'BC' => 0.07, 'MB' => 0.08, 'NB' => 0.10,'NL' => 0.10,
+                               'NT' => 0, 'NS' => 0.10, 'NU' => 0, 'ON' => 8, 'PEI' => 0.10,
+                               'QU' => 0.08, 'SK' => 0.05, 'YU' => 0}
 
     if session[:sort].present? && session[:search].present?
       @movies = Movie.where("title LIKE ?", "%"+session[:search]+"%").where(category_id: session[:sort])
@@ -72,6 +75,8 @@ class MoviesController < ApplicationController
     session[:movies_in_cart][0] = []
     session[:movies_in_cart][1] = []
     session[:subtotal] = []
+    session[:PST] = []
+
     redirect_to index_path
   end
 
@@ -108,6 +113,12 @@ class MoviesController < ApplicationController
     redirect_to index_path
   end
 
+  def set_pst
+     session[:PST] = params[:province_selection]
+
+     redirect_to index_path
+  end
+
   private
   def find_movie
     Movie.find(params[:id])
@@ -123,6 +134,8 @@ class MoviesController < ApplicationController
     session[:search] ||= []
     session[:sale_new] ||= []
     session[:subtotal] ||= []
+    session[:GST] ||= 0.05
+    session[:PST] ||= []
   end
 
   def load

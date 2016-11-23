@@ -1,6 +1,6 @@
 <div class="card text-xs-right">
   <div class="card-block">
-  <h4 class="card-title">Totals</h4>
+  <h4 class="card-title">Items</h4>
     <% cart.each_with_index do |item, x| %>
       <p class="card-title">
         <%= item.title %>
@@ -9,7 +9,23 @@
         = $ <%= total[x] %>
       </p>
     <% end %>
+   </div>
+ </div>
+ <div class="card text-xs-right">
+   <div class="card-block">
+      <h4 class="card-title">Totals</h4>
     <p class="card-text">Subtotal: $<%= subt %></p>
+    <% if session[:PST].present? %>
+      <p class="card-title">PST (<%=session[:PST].to_f * 100%>%)  : $<%= (session[:PST].to_f * subt).round(2)%></p>
+      <p class="card-title">GST (5.0%)  : $<%=(session[:GST].to_f * subt).round(2)%></p>
+      <p class="card-title">Grand Total : <%=(subt * (1 + session[:PST].to_f + session[:GST].to_f)).round(2)%></p>
+    <% else %>
+      <%= form_tag set_pst_movies_path, class: 'form-inline' do %>
+        <%= label_tag 'Province' %>
+        <%= select_tag :province_selection, options_for_select(@sales_tax_by_province) %>
+        <%= submit_tag "Select", class: 'btn btn-primary' %><br><br>
+      <% end %>
+    <% end %>
     <button class='btn btn-primary'>Check Out</button>
   </div>
 </div>
