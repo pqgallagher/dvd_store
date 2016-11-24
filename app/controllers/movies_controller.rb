@@ -75,7 +75,6 @@ class MoviesController < ApplicationController
     session[:movies_in_cart][0] = []
     session[:movies_in_cart][1] = []
     session[:subtotal] = []
-    session[:PST] = []
 
     redirect_to index_path
   end
@@ -115,8 +114,12 @@ class MoviesController < ApplicationController
 
   def set_pst
      session[:PST] = params[:province_selection]
-
      redirect_to index_path
+  end
+
+  def reset_pst
+    session[:PST] = []
+    redirect_to index_path
   end
 
   private

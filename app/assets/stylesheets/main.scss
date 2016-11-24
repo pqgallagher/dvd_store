@@ -118,7 +118,7 @@ img.img-details
 /*--------------------------SHOW--END---------------------------*/
 
 /*--------------------------CART--BEGIN-------------------------*/
-label.quantity
+label.border
 {
   vertical-align: middle;
   margin-bottom: 0px;
@@ -128,13 +128,21 @@ label.quantity
   border-radius: 0.25rem;
 }
 
-input.quantity
+input.border
 {
   vertical-align: middle;
   width: 42px;
   padding: 0.5rem 0.75rem;
   line-height: 1.25;
   color: black;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+select.border
+{
+  padding-top: 0.25rem;
+  padding-bottom: 0.50rem;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
