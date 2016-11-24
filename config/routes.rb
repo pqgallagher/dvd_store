@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       post :remove_all
       post :show_all
       post :set_pst
+      post :reset_pst
     end
   end
 
