@@ -144,6 +144,10 @@ class MoviesController < ApplicationController
   def load
     @movies_in_cart = Movie.find(session[:movies_in_cart][0])
     @subtotal = sum_session(session[:subtotal]).round(2)
+    @quantity = session[:movies_in_cart][1]
+    @item_totals = session[:subtotal]
+    @pst = session[:PST]
+    @gst = session[:GST]
   end
 
 end
