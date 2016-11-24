@@ -111,7 +111,7 @@ class MoviesController < ApplicationController
   end
 
   def set_pst
-     session[:PST] = SalesTax.where(id: params[:province_selection].to_i).first.rate
+     session[:PST] = SalesTax.where(id: params[:province_selection].to_i).first.pst
      session[:province] = SalesTax.where(id: params[:province_selection].to_i).first.province
 
      redirect_to index_path
@@ -137,7 +137,7 @@ class MoviesController < ApplicationController
     session[:search] ||= []
     session[:sale_new] ||= []
     session[:subtotal] ||= []
-    session[:GST] ||= 0.05
+    session[:GST] ||= SalesTax.all.first.gst
     session[:PST] ||= []
     session[:province] ||= []
   end

@@ -1,3 +1,3 @@
 class SalesTax < ApplicationRecord
-  validates :province, :rate, :gst,  presence: true
+  validates :province, :gst,  presence: true
 end
