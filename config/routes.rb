@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # GET / loads the index action of the tasks controller
   root 'movies#index', as: 'index'
   get 'movies/:id' => 'movies#show', as: 'movie', id: /\d+/
+  get 'users' => 'users#index', as: 'user'
+  post 'users' => 'users#create'
+
 
   resources :movies, only: [:index] do
     member do

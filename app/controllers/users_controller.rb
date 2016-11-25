@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @user = User.new
+    @sales_tax_by_province = SalesTax.all
   end
 
   def create

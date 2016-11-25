@@ -55,7 +55,7 @@ class MoviesController < ApplicationController
 
     session[:movies_in_cart][1][index] = quantity
     session[:subtotal][index] = amount
-    redirect_to index_path
+    redirect_to :back
   end
 
   def remove_from_cart
@@ -66,7 +66,12 @@ class MoviesController < ApplicationController
     session[:movies_in_cart][1].delete_at(index)
     session[:subtotal].delete_at(index)
 
-    redirect_to index_path
+    if session[:movies_in_cart][0].any?
+      redirect_to :back
+    else
+      redirect_to index_path
+    end
+
   end
 
   def remove_all
@@ -113,13 +118,14 @@ class MoviesController < ApplicationController
   def set_pst
      session[:PST] = SalesTax.where(id: params[:province_selection].to_i).first.pst
      session[:province] = SalesTax.where(id: params[:province_selection].to_i).first.province
-
-     redirect_to index_path
+     
+     redirect_to :back
   end
 
   def reset_pst
     session[:PST] = []
-    redirect_to index_path
+
+    redirect_to :back
   end
 
   private

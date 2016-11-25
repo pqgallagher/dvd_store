@@ -23,7 +23,9 @@
       </p>
       <p class="card-title">GST (5.0%)  : $<%=(@gst.to_f * subt).round(2)%></p>
       <p class="card-title">Grand Total : $<%=(subt * (1 + @pst.to_f + @gst.to_f)).round(2)%></p>
-      <%= link_to 'Check Out', user_path, class: 'btn btn-primary' %><br><br>
+      <% if request.path_info == '/' %>
+        <%= link_to 'Check Out', user_path, class: 'btn btn-primary' %><br><br>
+      <% end %>
     <% else %>
       <%= form_tag set_pst_movies_path, class: 'form-inline' do %>
         <%= label_tag 'Province', nil, class: 'border' %>
