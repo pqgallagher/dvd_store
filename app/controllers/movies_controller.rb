@@ -140,7 +140,6 @@ class MoviesController < ApplicationController
     session[:GST] ||= SalesTax.all.first.gst
     session[:PST] ||= []
     session[:province] ||= []
-    session[:id] ||= []
   end
 
   def load

@@ -9,11 +9,16 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to index_path
+      Order.create(user_id: @user.id,
+                   movie_id: session[:movies_in_cart][0].first.to_i,
+                   total: (session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2),
+                   quantity: session[:movies_in_cart][1].first.to_i)
+
       session[:movies_in_cart][0] = []
       session[:movies_in_cart][1] = []
       session[:subtotal] = []
-      session[:id] = @user.id
+
+      redirect_to index_path
     else
       load
       render :index
