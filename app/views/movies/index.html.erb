@@ -4,10 +4,10 @@
       <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
   </div>
   <div class="card-group">
-    <%= render partial: 'cart', locals: {cart: @movies_in_cart, quantity: @quantity}  %>
+    <%= render partial: 'shared/cart', locals: {cart: @movies_in_cart, quantity: @quantity}  %>
   </div>
   <div class="card-group">
-    <%= render partial: 'totals', locals: {subt: @subtotal,
+    <%= render partial: 'shared/totals', locals: {subt: @subtotal,
                                            total: @item_totals,
                                            cart: @movies_in_cart,
                                            quantity: @quantity}  %>

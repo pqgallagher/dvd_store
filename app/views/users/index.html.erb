@@ -1,0 +1,65 @@
+<div class="card index-cart">
+  <h3>Cart</h3>
+    <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
+</div>
+<div class="card-group">
+  <%= render partial: 'shared/cart', locals: {cart: @movies_in_cart, quantity: @quantity}  %>
+</div>
+<div class="card-group">
+  <%= render partial: 'shared/totals', locals: {subt: @subtotal,total: @item_totals,
+                                         cart: @movies_in_cart,quantity: @quantity}  %>
+</div>
+<div>&nbsp;</div>
+<%= session[:id] %>
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+          <strong>
+            Oh snap! <%= pluralize(@user.errors.count, "error") %> prohibited this order
+          </strong><br>
+          <% @user.errors.full_messages.each do |message| %>
+            &nbsp;*<%= message %>&nbsp;
+          <% end %>
+    </div>
+  <% end %>
+  <div class="card">
+    <div class="card-block">
+
+      <div class="form-group row">
+        <%= f.label "First Name" , class: 'col-xs-2 col-form-label' %>
+        <div class="col-xs-4">
+          <%= f.text_field :fname, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label "Last Name" , class: 'col-xs-2 col-form-label' %>
+        <div class="col-xs-4">
+          <%= f.text_field :lname, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label "Address" , class: 'col-xs-2 col-form-label' %>
+        <div class="col-xs-4">
+          <%= f.text_field :address, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label "Postal Code" , class: 'col-xs-2 col-form-label' %>
+        <div class="col-xs-4">
+          <%= f.text_field :pcode, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label "E-mail" , class: 'col-xs-2 col-form-label' %>
+        <div class="col-xs-4">
+          <%= f.text_field :email, class: 'form-control' %>
+        </div>
+      </div>
+      <%= f.submit "Order", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

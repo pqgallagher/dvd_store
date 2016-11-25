@@ -1,0 +1,35 @@
+<div class="card text-xs-right">
+  <div class="card-block">
+  <h4 class="card-title">Items</h4>
+    <% cart.each_with_index do |item, x| %>
+      <p class="card-title">
+        <%= item.title %>
+        - <%= item.price %>
+        x <%= quantity[x] %>
+        = $ <%= total[x] %>
+      </p>
+    <% end %>
+   </div>
+ </div>
+ <div class="card text-xs-right">
+   <div class="card-block">
+      <h4 class="card-title">Totals</h4>
+    <p class="card-text">Subtotal: $<%= subt %></p>
+    <% if @pst.present? %>
+      <p class="card-title">
+        <%= link_to 'Wrong Province?', reset_pst_movies_path,method: :post, class: 'card-link' %>
+        <%= @province %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        PST (<%= @pst.to_f * 100%>%)  : $<%= (@pst.to_f * subt).round(2)%>
+      </p>
+      <p class="card-title">GST (5.0%)  : $<%=(@gst.to_f * subt).round(2)%></p>
+      <p class="card-title">Grand Total : $<%=(subt * (1 + @pst.to_f + @gst.to_f)).round(2)%></p>
+      <%= link_to 'Check Out', user_path, class: 'btn btn-primary' %><br><br>
+    <% else %>
+      <%= form_tag set_pst_movies_path, class: 'form-inline' do %>
+        <%= label_tag 'Province', nil, class: 'border' %>
+        <%= select_tag :province_selection, options_from_collection_for_select(@sales_tax_by_province, :id, :province), class: 'border' %>
+        <%= submit_tag "Select", class: 'btn btn-primary' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
