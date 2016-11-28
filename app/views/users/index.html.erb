@@ -16,10 +16,7 @@
     <div class="alert alert-danger" role="alert">
           <strong>
             Oh snap! <%= pluralize(@user.errors.count, "error") %> prohibited this order
-          </strong><br>
-          <% @user.errors.full_messages.each do |message| %>
-            &nbsp;*<%= message %>&nbsp;
-          <% end %>
+          </strong>
     </div>
   <% end %>
   <div class="card">

@@ -32,38 +32,28 @@ function formHasErrors(e)
 
     var errorFlag = false;
 
+
     //Ensurse data is in all needed inputs
     errorFlag = checkRequiredFields(new Array("user_fname","user_lname","user_address","user_pcode","user_email"));
 
-    if(!validatePostalCode($("#user_pcode").value) && textFieldHasValue($("#user_pcode")))
+    if(!validatePostalCode($("#user_pcode").val()) && textFieldHasValue($("#user_pcode")[0]))
     {
-      $("<label class=error Error>Invalid Postal Code</label>").insertAfter("#"+requiredFields[x]);
+      $("<label class=error>Invalid Postal Code</label>").insertAfter($("#user_pcode"));
       //Sets errorFlag to true as there are errors.
       errorFlag = true;
     }
 
     //Determines if the value in email is valid
-    if(!validateEmail($("#user_email").value) && textFieldHasValue($("#user_email")))
+    if(!validateEmail($("#user_email").val()) && textFieldHasValue($("#user_email")[0]))
     {
-      $("<label class=error Error>Invalid email address</label>").insertAfter("#"+requiredFields[x]);
+      $("<label class=error>Invalid email address</label>").insertAfter($("#user_email"));
       //Sets errorFlag to true as there are errors.
       errorFlag = true;
     }
 
-    // //If a sport is not selected
-    // if($("#sportid").val() == null || $("#sportid").val() == 0)
-    // {
-    //     $("<label class=error id=sportidError>&emsp;Please Make a Selection</label>").insertAfter("#sportid");
-    //     errorFlag = true;
-    // }
-    //
-    // //If a province is not selected
-    // if($("#teamProvince").val() == null || $("#teamProvince").val() == 0)
-    // {
-    //     $("<label class=error id=teamProvinceError>&emsp;Please Make a Selection</label>").insertAfter("#teamProvince");
-    //     errorFlag = true;
-    // }
-    //
+
+
+
     return errorFlag;
 }
 
@@ -137,7 +127,6 @@ function validatePostalCode(postal)
     //Test item value for letter number letter number letter number postal
     //code format 'A2A 0R4'
     var item = new RegExp(/^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[ABCEGHJKLMNPRSTVWXYZ]{1} *\d{1}[ABCEGHJKLMNPRSTVWXYZ]{1}\d{1}$/i);
-alert('Here');
     if (item.test(postal.toString()))
     {
     	//When postal is valid.
