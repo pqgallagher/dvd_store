@@ -147,3 +147,29 @@ select.border
   border-radius: 0.25rem;
 }
 /*--------------------------CART--END---------------------------*/
+
+.error,.payment-errors
+{
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    // opacity: 1;
+    visibility: visible;
+    -webkit-animation: notifanim 0.4s cubic-bezier(0.55, 0, 0.1, 1) forwards;
+    -o-animation: notifanim 0.4s cubic-bezier(0.55, 0, 0.1, 1) forwards;
+    animation: notifanim 0.4s cubic-bezier(0.55, 0, 0.1, 1) forwards;
+    box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 0.3125rem;
+    font-weight: 300;
+    font-size: 13px;
+    // opacity: 0;
+    z-index: 998;
+    bottom: 100%;
+    right: 0.9375rem;
+    background: none;
+    padding: 0;
+    margin: 0 0 0.1875rem;
+    min-height: 0;
+    color: #FF0000;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

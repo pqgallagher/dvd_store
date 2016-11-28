@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'user', 'data-turbolinks-track': 'reload' %>
 <div class="card index-cart">
   <h3>Cart</h3>
     <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
@@ -59,7 +60,7 @@
           <%= f.text_field :email, class: 'form-control' %>
         </div>
       </div>
-      <%= f.submit "Order", class: 'btn btn-primary' %>
+      <%= f.submit "Order", class: 'btn btn-primary', id: 'submit' %>
     </div>
   </div>
 <% end %>
