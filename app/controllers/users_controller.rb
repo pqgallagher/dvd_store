@@ -15,6 +15,18 @@ class UsersController < ApplicationController
                    total: (session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2),
                    quantity: session[:movies_in_cart][1].first.to_i)
 
+      customer = Stripe::Customer.create(
+        :email => @user.email,
+        :source  => params[:stripeToken]
+      )
+
+      charge = Stripe::Charge.create(
+        :customer    => customer.id,
+        :amount      => ((session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) * 100).round(),
+        :description => 'Rails Stripe customer',
+        :currency    => 'usd'
+      )
+
       session[:movies_in_cart][0] = []
       session[:movies_in_cart][1] = []
       session[:subtotal] = []
