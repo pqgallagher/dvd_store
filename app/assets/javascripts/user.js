@@ -1,12 +1,9 @@
 function onLoad()
 {
-
-
   document.getElementById("submit").addEventListener("click", validate, false);
 }
-
 //Adds the load even listener
-document.addEventListener("DOMContentLoaded", onLoad, false);
+document.addEventListener("turbolinks:load", onLoad, false);
 
 
 function validate(event)
@@ -32,7 +29,6 @@ function formHasErrors(e)
 
     var errorFlag = false;
 
-
     //Ensurse data is in all needed inputs
     errorFlag = checkRequiredFields(new Array("user_fname","user_lname","user_address","user_pcode","user_email"));
 
@@ -50,9 +46,6 @@ function formHasErrors(e)
       //Sets errorFlag to true as there are errors.
       errorFlag = true;
     }
-
-
-
 
     return errorFlag;
 }
@@ -156,5 +149,4 @@ function validateEmail(email)
     	//When email is not valid.
     	return false;
     }
-
 }

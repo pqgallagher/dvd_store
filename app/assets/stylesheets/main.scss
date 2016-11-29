@@ -156,13 +156,13 @@ select.border
     margin-bottom: 0;
     padding-left: 40px;
     bottom: 6px;
+    font-weight: 300;
+    font-size: 1rem;
+    // color: #A94442;
+    color: #FF0000;
     -webkit-animation: notifanim 0.4s cubic-bezier(0.55, 0, 0.1, 1) forwards;
     -o-animation: notifanim 0.4s cubic-bezier(0.55, 0, 0.1, 1) forwards;
     animation: notifanim 0.4s cubic-bezier(0.55, 0, 0.1, 1) forwards;
-    font-weight: 300;
-    font-size: 1rem;
-    color: #FF0000;
-
 }
 
 .form-control
