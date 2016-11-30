@@ -3,8 +3,8 @@
   <div class="card-block">
     <h4 class="card-title"><%= details.title %></h4>
   </div>
-  <% if details.picture.present? %>
-    <%= image_tag details.picture, class: 'img-details' %>
+  <% if details.avatar.present? %>
+    <%= image_tag details.avatar.to_s.gsub("C%3A/Sites/Project/dvd_store/app/assets/images/", ""), class: 'card-img-top img-fluid d-block img-index img-thumbnail' %>
   <% end %>
   <div class="card-block">
     <% if details.category.present?%>
