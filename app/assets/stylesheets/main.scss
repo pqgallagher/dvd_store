@@ -169,3 +169,17 @@ select.border
 {
   display: inline;;
 }
+
+input#change
+{
+  color: #0275d8;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+input#change:hover
+{
+  color: #304C9A;
+}

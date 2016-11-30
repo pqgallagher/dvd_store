@@ -11,82 +11,82 @@
                                          cart: @movies_in_cart,quantity: @quantity}  %>
 </div>
 <div>&nbsp;</div>
-<%= form_for(@user) do |f| %>
-  <div class="card">
-    <div class="card-block">
+<% if @pst.present? %>
+  <%= form_for(@user) do |f| %>
+    <div class="card">
+      <div class="card-block">
 
-      <div id="customer">
-        <div class="card-group">
-          <div class="card ">
-            <div class="card-block">
-              <h4 class="card-title">Customer Info</h4><br>
+        <div id="customer">
+          <div class="card-group">
+            <div class="card ">
+              <div class="card-block">
+                <h4 class="card-title">Customer Info</h4><br>
 
-              <div class="form-group row">
-                <%= f.label "First Name" , class: 'col-xs-2 col-form-label' %>
-                <div class="col-xs-4">
-                  <%= f.text_field :fname, class: 'form-control' %>
+                <div class="form-group row">
+                  <%= f.label "First Name" , class: 'col-xs-2 col-form-label' %>
+                  <div class="col-xs-4">
+                    <%= f.text_field :fname, class: 'form-control' %>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group row">
-                <%= f.label "Last Name" , class: 'col-xs-2 col-form-label' %>
-                <div class="col-xs-4">
-                  <%= f.text_field :lname, class: 'form-control' %>
+                <div class="form-group row">
+                  <%= f.label "Last Name" , class: 'col-xs-2 col-form-label' %>
+                  <div class="col-xs-4">
+                    <%= f.text_field :lname, class: 'form-control' %>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group row">
-                <%= f.label "Address" , class: 'col-xs-2 col-form-label' %>
-                <div class="col-xs-4">
-                  <%= f.text_field :address, class: 'form-control' %>
+                <div class="form-group row">
+                  <%= f.label "Address" , class: 'col-xs-2 col-form-label' %>
+                  <div class="col-xs-4">
+                    <%= f.text_field :address, class: 'form-control' %>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group row">
-                <%= f.label "Postal Code" , class: 'col-xs-2 col-form-label' %>
-                <div class="col-xs-4">
-                  <%= f.text_field :pcode, class: 'form-control' %>
+                <div class="form-group row">
+                  <%= f.label "Postal Code" , class: 'col-xs-2 col-form-label' %>
+                  <div class="col-xs-4">
+                    <%= f.text_field :pcode, class: 'form-control' %>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group row">
-                <%= f.label "E-mail" , class: 'col-xs-2 col-form-label' %>
-                <div class="col-xs-4">
-                  <%= f.text_field :email, class: 'form-control' %>
+                <div class="form-group row">
+                  <%= f.label "E-mail" , class: 'col-xs-2 col-form-label' %>
+                  <div class="col-xs-4">
+                    <%= f.text_field :email, class: 'form-control' %>
+                  </div>
                 </div>
+
+                <input type="button" id="next" value="Next" class="btn btn-primary">
+                <input type="button" id="change" value="Change Customer Info?">
+
               </div>
-
-              <input type="button" id="next" value="Next" class="btn btn-primary">
-
             </div>
           </div>
         </div>
-      </div>
 
-
-      <div id="payment">
-        <div class="card-group">
-          <%= render partial: 'shared/totals', locals: {subt: @subtotal,total: @item_totals,
-                                                 cart: @movies_in_cart,quantity: @quantity}  %>
-        </div>
-        <div class="card-group">
-          <div class="card text-xs-right">
-            <div class="card-block">
-              <h4 class="card-title">Payment</h4>
-              <p class="card-text">Total Amount Due: $ <%=(session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) %> </p>
-              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                      data-amount="500"
-                      data-email="Please Put In You Credit Card Info"
-                      data-allowRememberMe="false"
-                      data-locale="auto"></script>
+        <div id="payment">
+          <div class="card-group">
+            <%= render partial: 'shared/totals', locals: {subt: @subtotal,total: @item_totals,
+                                                   cart: @movies_in_cart,quantity: @quantity}  %>
+          </div>
+          <div class="card-group">
+            <div class="card text-xs-right">
+              <div class="card-block">
+                <h4 class="card-title">Payment</h4>
+                <p class="card-text">Total Amount Due: $ <%=(session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) %> </p>
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                        data-amount="<%=((session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) * 100).round() %>"
+                        data-email="Please Put In You Credit Card Info"
+                        data-allowRememberMe="false"
+                        data-locale="auto"></script>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
-
-
     </div>
-  </div>
-
+  <% end %>
 <% end %>

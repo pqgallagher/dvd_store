@@ -1,9 +1,8 @@
 function onLoad()
 {
-  document.getElementById("payment").style.display = "none";
-  document.getElementById("next").style.display = "inline";
+  change();
+  document.getElementById("change").addEventListener("click", change, false);
   document.getElementById("next").addEventListener("click", next, false);
-  document.getElementsByClassName("stripe-button-el")[0].addEventListener("click", enabled, false);
 }
 
 //Adds the load even listener
@@ -14,23 +13,29 @@ function next()
   if(validate())
   {
     document.getElementById("payment").style.display = "inline";
+    document.getElementById("change").style.display = "inline";
     document.getElementById("next").style.display = "none";
-
-    document.getElementById("user_fname").disabled = true;
-    document.getElementById("user_lname").disabled = true;
-    document.getElementById("user_address").disabled = true;
-    document.getElementById("user_pcode").disabled = true;
-    document.getElementById("user_email").disabled = true;
+    readOnlyInputs(true);
   }
 }
 
-function enabled()
+function change()
 {
-  document.getElementById("user_fname").disabled = false;
-  document.getElementById("user_lname").disabled = false;
-  document.getElementById("user_address").disabled = false;
-  document.getElementById("user_pcode").disabled = false;
-  document.getElementById("user_email").disabled = false;
+  document.getElementById("payment").style.display = "none";
+  document.getElementById("change").style.display = "none";
+  document.getElementById("next").style.display = "inline";
+  readOnlyInputs(false);
+}
+
+
+
+function readOnlyInputs(setValue)
+{
+  document.getElementById("user_fname").readOnly= setValue;
+  document.getElementById("user_lname").readOnly= setValue;
+  document.getElementById("user_address").readOnly = setValue;
+  document.getElementById("user_pcode").readOnly = setValue;
+  document.getElementById("user_email").readOnly = setValue;
 }
 
 function formHasErrors(e)
