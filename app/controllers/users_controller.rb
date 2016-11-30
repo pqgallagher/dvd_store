@@ -10,10 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      Order.create(user_id: @user.id,
-                   movie_id: session[:movies_in_cart][0].first.to_i,
-                   total: (session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2),
-                   quantity: session[:movies_in_cart][1].first.to_i)
+
 
       customer = Stripe::Customer.create(
         :email => @user.email,
@@ -27,9 +24,17 @@ class UsersController < ApplicationController
         :currency    => 'usd'
       )
 
+      if charge.paid
+      Order.create(user_id: @user.id,
+                   movie_id: session[:movies_in_cart][0].first.to_i,
+                   total: (session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2),
+                   quantity: session[:movies_in_cart][1].first.to_i)
+      end
+
       session[:movies_in_cart][0] = []
       session[:movies_in_cart][1] = []
       session[:subtotal] = []
+
 
       redirect_to index_path
     else

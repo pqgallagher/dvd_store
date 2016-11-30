@@ -3,6 +3,8 @@ function onLoad()
   change();
   document.getElementById("change").addEventListener("click", change, false);
   document.getElementById("next").addEventListener("click", next, false);
+  // alert('Here1');
+  // document.getElementsByClassName("stripe-button-el")[0].disabled = true;alert('Here2');
 }
 
 //Adds the load even listener
@@ -15,6 +17,7 @@ function next()
     document.getElementById("payment").style.display = "inline";
     document.getElementById("change").style.display = "inline";
     document.getElementById("next").style.display = "none";
+    // document.getElementsByClassName("stripe-button-el")[0].disabled = false;
     readOnlyInputs(true);
   }
 }
@@ -24,6 +27,7 @@ function change()
   document.getElementById("payment").style.display = "none";
   document.getElementById("change").style.display = "none";
   document.getElementById("next").style.display = "inline";
+  // document.getElementsByClassName("stripe-button-el")[0].disabled = true;
   readOnlyInputs(false);
 }
 

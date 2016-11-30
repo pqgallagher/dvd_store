@@ -1,6 +1,8 @@
 <% movies.each_with_index do |movie, x| %>
   <div class="card">
-    <%= image_tag movie.picture, class: 'card-img-top img-fluid d-block img-index img-thumbnail' %>
+    <% if movie.avatar.present? %>
+      <%= image_tag movie.avatar.to_s.gsub("C%3A/Sites/Project/dvd_store/app/assets/images/", ""), class: 'card-img-top img-fluid d-block img-index img-thumbnail' %>
+    <% end %>
     <div class="card-block">
       <h5 class="card-title">
         <%= link_to movie.title, movie_path(movie) %>
@@ -29,9 +31,8 @@
       <% end %>
     </div>
   </div>
-  <% if x == 3 %>
+  <% if (x+1) % 4 == 0%>
     </div>
     <div class="card-deck">
-    <% x = 0 %>
   <% end %>
 <% end %>
