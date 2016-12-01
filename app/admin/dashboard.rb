@@ -3,31 +3,37 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
+
+    orders = Order.all
+    orders.each do |order|
+      user = User.find(order.user_id)
+      panel "Invoice for #{user.fname} #{user.lname}" do
+        ul style: "list-style-type: none;" do
+          li "#{user.fname} #{user.lname}"
+          li "#{user.address}"
+          li "#{user.pcode}"
+          li "#{user.email}"
+          para "\n"
+        end
+
+        items = MovieOrder.where(order_id: order.id)
+        s_total = 0
+
+        ul style: "list-style-type: none;" do
+          items.each do |item|
+            s_total += (item.price * item.quantity)
+            li "#{Movie.find(item.movie_id).title}.................#{item.quantity} X $#{item.price} = $#{item.price * item.quantity}"
+          end
+        end
+
+        ul style: "list-style-type: none;" do
+          li "\nSubtotal    : $#{s_total} "
+          li "PST (#{order.pst * 100}%)  : $#{(order.pst * s_total).round(2)}"
+          li "GST (#{0.05 * 100}%)  : $#{(0.05 * s_total).round(2)}"
+          li "Grand Total : $#{order.total} "
+        end
       end
     end
 
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
-
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
-  end # content
+  end
 end

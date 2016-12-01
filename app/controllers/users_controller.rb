@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @movies_in_cart = Movie.find(session[:movies_in_cart][0])
+    @pst = session[:PST]
 
     if @user.save
       customer = Stripe::Customer.create(
@@ -18,14 +19,15 @@ class UsersController < ApplicationController
 
       charge = Stripe::Charge.create(
         :customer    => customer.id,
-        :amount      => ((session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) * 100).round(),
+        :amount      => ((sum_session(session[:subtotal]).round(2) * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) * 100).round(),
         :description => 'Rails Stripe customer',
         :currency    => 'usd'
       )
 
       if charge.paid
         @order = Order.create(user_id: @user.id,
-                              total: (session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2))
+                              total: (sum_session(session[:subtotal]).round(2) * (1 + session[:PST].to_f + session[:GST].to_f)).round(2),
+                              pst: @pst)
 
         @movies_in_cart.each_with_index do |item, x|
           MovieOrder.create(order_id: @order.id,

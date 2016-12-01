@@ -1,3 +1,3 @@
 class Order < ApplicationRecord
-  validates :user_id, :total, presence: true
+  validates :user_id, :total, :pst, presence: true
 end

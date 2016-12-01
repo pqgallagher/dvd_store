@@ -74,10 +74,10 @@
             <div class="card text-xs-right">
               <div class="card-block">
                 <h4 class="card-title">Payment</h4>
-                <p class="card-text">Total Amount Due: $ <%=(session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) %> </p>
+                <p class="card-text">Total Amount Due: $ <%=(@subtotal * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) %> </p>
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                         data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                        data-amount="<%=((session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) * 100).round() %>"
+                        data-amount="<%=((@subtotal * (1 + session[:PST].to_f + session[:GST].to_f)).round(2) * 100).round() %>"
                         data-email="Please Put In You Credit Card Info"
                         data-allowRememberMe="false"
                         data-locale="auto"></script>
