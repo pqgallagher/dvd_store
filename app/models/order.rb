@@ -1,3 +1,3 @@
 class Order < ApplicationRecord
-  validates :user_id, :movie_id, :total, :quantity, presence: true
+  validates :user_id, :total, presence: true
 end

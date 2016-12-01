@@ -8,10 +8,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @movies_in_cart = Movie.find(session[:movies_in_cart][0])
 
     if @user.save
-
-
       customer = Stripe::Customer.create(
         :email => @user.email,
         :source  => params[:stripeToken]
@@ -25,16 +24,20 @@ class UsersController < ApplicationController
       )
 
       if charge.paid
-      Order.create(user_id: @user.id,
-                   movie_id: session[:movies_in_cart][0].first.to_i,
-                   total: (session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2),
-                   quantity: session[:movies_in_cart][1].first.to_i)
+        @order = Order.create(user_id: @user.id,
+                              total: (session[:subtotal].first.to_f * (1 + session[:PST].to_f + session[:GST].to_f)).round(2))
+
+        @movies_in_cart.each_with_index do |item, x|
+          MovieOrder.create(order_id: @order.id,
+                            movie_id: item.id,
+                            price: item.price,
+                            quantity: session[:movies_in_cart][1][x])
+        end
       end
 
       session[:movies_in_cart][0] = []
       session[:movies_in_cart][1] = []
       session[:subtotal] = []
-
 
       redirect_to index_path
     else

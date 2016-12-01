@@ -1,3 +1,3 @@
 ActiveAdmin.register Order do
-  permit_params :user_id, :movie_id, :total, :quantity
+  permit_params :user_id, :total
 end
