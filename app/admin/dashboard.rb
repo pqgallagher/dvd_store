@@ -22,7 +22,7 @@ ActiveAdmin.register_page "Dashboard" do
         ul style: "list-style-type: none;" do
           items.each do |item|
             s_total += (item.price * item.quantity)
-            li "#{Movie.find(item.movie_id).title}.................#{item.quantity} X $#{item.price} = $#{item.price * item.quantity}"
+            li "#{Movie.find(item.movie_id).title}..................................#{item.quantity} x $#{item.price} = $#{item.price * item.quantity}"
           end
         end
 
