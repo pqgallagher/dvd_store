@@ -1,4 +1,4 @@
 class User < ApplicationRecord
   validates :fname, :lname, :address,:pcode,:email, presence: true
-  #crypt_keeper :password, :encryptor => :aes_new, :key => '8898U77', salt: 'UUllI'
+  attr_encrypted :password, key: 'tak3453449000gntksuht3464hygbijskj'
 end

@@ -4,15 +4,17 @@
   <h1>Here</h1>
 <% end %>
 <%
-User.encrypt_table!
 # User.create(:fname => "User",
 #             :lname => "Smith",
 #             :address => "address",
 #             :pcode => "pcode",
 #             :email => "email",
 #             :username => "User",
-#             :password =>: "Password")
+#             :tpassword => "Password")
+# encrypted = User.where(username: "User").first.password
+# decrypt = User.decrypt_password(encrypted, iv: 'xGAqD9zfbQ2kjBR1', key: 'tak3453449000gntksuht3464hygbijskj')
 %>
+
 
 <div class="card text-xs-center">
   <div class="card-block">
