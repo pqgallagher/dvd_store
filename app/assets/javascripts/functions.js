@@ -1,3 +1,4 @@
+//Trigger form validation on submit.
 function validate(event)
 {
 	//If the form as Errors.
@@ -14,7 +15,7 @@ function validate(event)
 	return true;
 }
 
-
+//Validates that all required input fields contain data.
 function checkRequiredFields(requiredFields)
 {
     var errorFlag = false;
@@ -73,11 +74,13 @@ function textFieldHasValue(text)
 	return true;
 }
 
+//Trim string value for any leading/trailing spaces.
 function trim(str)
 {
 	// Uses a regex to remove spaces from a string.
 	return str.replace(/^\s+|\s+$/g,"");
 }
+
 //Ensures the Postal Code is a valid Postal Code.
 function validatePostalCode(postal)
 {
