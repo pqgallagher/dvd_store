@@ -1,3 +1,4 @@
+<!--User form validation.-->
 <%= javascript_include_tag 'user', 'data-turbolinks-track': 'reload' %>
 <%= render partial: 'shared/login' %>
 <div class="card index-cart">
@@ -5,14 +6,17 @@
     <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
 </div>
 <div class="card-group">
+  <!--Shows all the movies in the cart-->
   <%= render partial: 'shared/cart', locals: {cart: @movies_in_cart, quantity: @quantity}  %>
 </div>
 <div class="card-group">
+  <!--Shows the subtotal, PST, GST and grand total.-->
   <%= render partial: 'shared/totals', locals: {subt: @subtotal,total: @item_totals,
                                          cart: @movies_in_cart,quantity: @quantity}  %>
 </div>
 <br>
 <% if @pst.present? %>
+  <!--If PST is selected, sets url to always post.-->
   <%= form_for @user_order, :url => '/users', method: 'post' do |f| %>
     <div class="card">
       <div class="card-block">
@@ -58,6 +62,7 @@
                   </div>
                 </div>
                 <% if !@user.present? %>
+                  <!--If the user is not logged in OR The user does not have an account with DVD_store.-->
                   <div id="user">
                     <div class="form-group row">
                       <%= f.label "User Name" , class: 'col-xs-2 col-form-label' %>
@@ -75,6 +80,7 @@
                 <% end %>
                 <input type="button" id="next" value="Next" class="btn btn-primary">
                 <% if !@user.present? %>
+                  <!--If the user is not logged in OR The user does not have an account with DVD_store.-->
                   <input type="button" id="account" class="question" value="Create Account?">
                   <input type="button" id="no_account" class="question" value="Do Not Create Account?">
                 <% end %>
@@ -83,9 +89,10 @@
             </div>
           </div>
         </div>
-
+        <!--Stripe info-->
         <div id="payment">
           <div class="card-group">
+            <!--Shows the subtotal, PST, GST and grand total.-->
             <%= render partial: 'shared/totals', locals: {subt: @subtotal,total: @item_totals,
                                                    cart: @movies_in_cart,quantity: @quantity}  %>
           </div>

@@ -1,12 +1,15 @@
 <% if @movies_in_cart.any?  %>
+  <!--If there are any movies in the cart.-->
   <div class="card index-cart">
     <h3>Cart</h3>
       <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
   </div>
   <div class="card-group">
+    <!--Shows all the movies in the cart-->
     <%= render partial: 'shared/cart', locals: {cart: @movies_in_cart, quantity: @quantity}  %>
   </div>
   <div class="card-group">
+    <!--Shows the subtotal, PST, GST and grand total.-->
     <%= render partial: 'shared/totals', locals: {subt: @subtotal,
                                            total: @item_totals,
                                            cart: @movies_in_cart,
@@ -21,6 +24,7 @@
         <%= button_to 'Show All', show_all_movies_path, method: :post, class: 'btn btn-outline-secondary' %>
       </li>
       <li class="nav-item">
+        <!--For showing the new and on sale movies.-->
         <%= form_tag sale_new_movie_path(@movies) do %>
           <%= select_tag :sale_new_id, options_for_select(@sale_new), class: 'index-nav-drop'  %>
           <%= submit_tag "Sort", class: 'btn btn-outline-secondary'  %>
@@ -28,6 +32,7 @@
       </li>
     </ul>
     <div class='float-lg-right'>
+      <!--For searching and sorting movie by category.-->
       <%= form_tag search_movie_path(@movies), class: 'form-inline' do %>
         <%= select_tag :sort_id, options_from_collection_for_select(@categories, :id, :name), class: 'index-nav-drop', :include_blank => 'Genre'%>
         <%= submit_tag "Sort", class: 'btn btn-outline-secondary'  %>
@@ -41,6 +46,7 @@
     </div>
   </div>
 </nav>
+<!--Login nav bar-->
 <%= render partial: 'shared/login' %>
 <div class="card-deck-wrapper">
   <div class="card-deck">

@@ -4,14 +4,11 @@
     <h4 class="card-title"><%= details.title %></h4>
   </div>
   <% if details.avatar.present? %>
+    <!--If the movie has a picture associated with it-->
     <%= image_tag details.avatar.to_s.gsub("C%3A/Sites/Project/dvd_store/app/assets/images/", ""), class: 'card-img-top img-fluid d-block img-index img-thumbnail' %>
   <% end %>
   <div class="card-block">
-    <% if details.category.present?%>
-      <%= details.category.name%>
-    <% else %>
-      Category Unset
-    <% end %>
+    <%= details.category.name%>
   </div>
   <div class="card-block">
     <p class="card-text"><%= details.content%></p>
