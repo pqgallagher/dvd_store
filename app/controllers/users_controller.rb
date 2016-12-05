@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  # Sets the class variables to all the values in the session variables
   before_action :load, only: [:index]
 
   def index
