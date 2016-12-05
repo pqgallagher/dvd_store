@@ -1,0 +1,13 @@
+<nav class="navbar navbar-light bg-faded ">
+  <% if @user.present? %>
+    <strong><%= link_to 'Logout', logout_movies_path, method: :post , class: 'float-xs-right mini-nav' %></strong>
+  <% else %>
+    <%= link_to 'Login', login_path, class: 'float-xs-right mini-nav' %>
+  <% end %>
+  <%= link_to 'About Us', about_path, class: 'float-xs-right mini-nav' %>
+  <%= link_to 'Contact Us', contact_path, class: 'float-xs-right mini-nav' %>
+  <% if @user.present? %>
+    Welcome <strong><%=User.find(session[:login]).fname %></strong>
+  <% end %>
+</nav>
+<br>

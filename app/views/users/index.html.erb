@@ -1,4 +1,5 @@
 <%= javascript_include_tag 'user', 'data-turbolinks-track': 'reload' %>
+<%= render partial: 'shared/login' %>
 <div class="card index-cart">
   <h3>Cart</h3>
     <%= link_to 'Remove All', remove_all_movies_path, method: :post %>
@@ -10,9 +11,9 @@
   <%= render partial: 'shared/totals', locals: {subt: @subtotal,total: @item_totals,
                                          cart: @movies_in_cart,quantity: @quantity}  %>
 </div>
-<div>&nbsp;</div>
+<br>
 <% if @pst.present? %>
-  <%= form_for(@user) do |f| %>
+  <%= form_for @user_order, :url => '/users', method: 'post' do |f| %>
     <div class="card">
       <div class="card-block">
 
@@ -56,10 +57,28 @@
                     <%= f.text_field :email, class: 'form-control' %>
                   </div>
                 </div>
-
+                <% if !@user.present? %>
+                  <div id="user">
+                    <div class="form-group row">
+                      <%= f.label "User Name" , class: 'col-xs-2 col-form-label' %>
+                      <div class="col-xs-4">
+                        <%= f.text_field :username, class: 'form-control' %>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <%= f.label "Password" , class: 'col-xs-2 col-form-label' %>
+                      <div class="col-xs-4">
+                        <%= password_field_tag :password, nil, class: 'form-control' %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
                 <input type="button" id="next" value="Next" class="btn btn-primary">
-                <input type="button" id="change" value="Change Customer Info?">
-
+                <% if !@user.present? %>
+                  <input type="button" id="account" class="question" value="Create Account?">
+                  <input type="button" id="no_account" class="question" value="Do Not Create Account?">
+                <% end %>
+                <input type="button" id="change" class="question" value="Change Customer Info?">
               </div>
             </div>
           </div>

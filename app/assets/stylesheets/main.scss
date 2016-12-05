@@ -170,7 +170,7 @@ select.border
   display: inline;;
 }
 
-input#change
+input.question
 {
   color: #0275d8;
   text-decoration: none;
@@ -179,7 +179,7 @@ input#change
   cursor: pointer;
 }
 
-input#change:hover
+input.question:hover
 {
   color: #304C9A;
 }

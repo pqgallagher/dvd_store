@@ -1,26 +1,25 @@
 <br>
-<% session[:login] %>
-<% if session[:login].present? %>
-  <h1>Here</h1>
-<% end %>
-<%
-# User.create(:fname => "User",
-#             :lname => "Smith",
-#             :address => "address",
-#             :pcode => "pcode",
-#             :email => "email",
-#             :username => "User",
-#             :tpassword => "Password")
-# encrypted = User.where(username: "User").first.password
-# decrypt = User.decrypt_password(encrypted, iv: 'xGAqD9zfbQ2kjBR1', key: 'tak3453449000gntksuht3464hygbijskj')
-%>
-
-
 <div class="card text-xs-center">
   <div class="card-block">
     <h4 class="card-title">Login</h4>
   </div>
 </div>
+<% if @error == 1 %>
+  <div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Error!</strong> Please enter a value into User Name and Password.
+  </div>
+<% end %>
+<% if @error == 2 %>
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Error!</strong> Incorrect User Name and Password Combination.
+</div>
+<% end %>
 <div class="card">
   <div class="card-block">
     <div class="card-group">

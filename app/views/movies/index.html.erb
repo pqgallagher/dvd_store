@@ -41,12 +41,7 @@
     </div>
   </div>
 </nav>
-<nav class="navbar navbar-light bg-faded ">
-  <%= link_to 'Login', login_path, class: 'float-xs-right mini-nav' %>
-  <%= link_to 'About Us', about_path, class: 'float-xs-right mini-nav' %>
-  <%= link_to 'Contact Us', contact_path, class: 'float-xs-right mini-nav' %>
-</nav>
-<br>
+<%= render partial: 'shared/login' %>
 <div class="card-deck-wrapper">
   <div class="card-deck">
     <%= render partial: 'movie', locals: {movies: @movies}%>

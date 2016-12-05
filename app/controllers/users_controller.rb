@@ -2,18 +2,34 @@ class UsersController < ApplicationController
   before_action :load, only: [:index]
 
   def index
-    @user = User.new
+    if session[:login].present?
+      @user_order = User.find(session[:login])
+    else
+      @user_order = User.new
+    end
+
     @sales_tax_by_province = SalesTax.all
   end
 
   def create
-    @user = User.new(user_params)
+
+    if session[:login].present?
+      @user_order = User.find(session[:login])
+    else
+      @user_order = User.new(user_params)
+    end
+
+    if params[:user_create]
+      @user_order.password = params[:password]
+      @user_order.registered = true
+    end
+
     @movies_in_cart = Movie.find(session[:movies_in_cart][0])
     @pst = session[:PST]
 
-    if @user.save
+    if @user_order.save
       customer = Stripe::Customer.create(
-        :email => @user.email,
+        :email => @user_order.email,
         :source  => params[:stripeToken]
       )
 
@@ -25,7 +41,7 @@ class UsersController < ApplicationController
       )
 
       if charge.paid
-        @order = Order.create(user_id: @user.id,
+        @order = Order.create(user_id: @user_order.id,
                               total: (sum_session(session[:subtotal]).round(2) * (1 + session[:PST].to_f + session[:GST].to_f)).round(2),
                               pst: @pst)
 
@@ -65,9 +81,10 @@ class UsersController < ApplicationController
     @pst = session[:PST]
     @gst = session[:GST]
     @province = session[:province]
+    @user = session[:login]
   end
 
   def user_params
-    params.require(:user).permit(:fname, :lname, :address, :pcode, :email)
+    params.require(:user).permit(:fname, :lname, :address, :pcode, :email, :username, :password)
   end
 end

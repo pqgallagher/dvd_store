@@ -118,13 +118,18 @@ class MoviesController < ApplicationController
   def set_pst
      session[:PST] = SalesTax.where(id: params[:province_selection].to_i).first.pst
      session[:province] = SalesTax.where(id: params[:province_selection].to_i).first.province
-     
+
      redirect_to :back
   end
 
   def reset_pst
     session[:PST] = []
 
+    redirect_to :back
+  end
+
+  def logout
+    session[:login] = []
     redirect_to :back
   end
 
@@ -156,6 +161,7 @@ class MoviesController < ApplicationController
     @pst = session[:PST]
     @gst = session[:GST]
     @province = session[:province]
+    @user = session[:login]
   end
 
 end
