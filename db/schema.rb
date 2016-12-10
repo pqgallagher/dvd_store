@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125064506) do
+ActiveRecord::Schema.define(version: 20161202045653) do
+
+  create_table "abouts", force: :cascade do |t|
+    t.string   "content"
+    t.string   "people"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -49,10 +56,27 @@ ActiveRecord::Schema.define(version: 20161125064506) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string   "address"
+    t.string   "hours"
+    t.string   "phone"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "movie_orders", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "movie_id"
+    t.decimal  "price"
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "movies", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
-    t.string   "picture"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "id_id"
@@ -60,17 +84,17 @@ ActiveRecord::Schema.define(version: 20161125064506) do
     t.decimal  "price"
     t.boolean  "sale"
     t.boolean  "new"
+    t.string   "avatar"
     t.index ["category_id"], name: "index_movies_on_category_id"
     t.index ["id_id"], name: "index_movies_on_id_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "movie_id"
     t.decimal  "total"
-    t.integer  "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.         "pst"
   end
 
   create_table "sales_taxes", force: :cascade do |t|
@@ -89,8 +113,12 @@ ActiveRecord::Schema.define(version: 20161125064506) do
     t.string   "address"
     t.string   "pcode"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "username"
+    t.string   "encrypted_password"
+    t.string   "password"
+    t.string   "encrypted_password_iv"
   end
 
 end

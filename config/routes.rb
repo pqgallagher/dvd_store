@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   get 'movies/:id' => 'movies#show', as: 'movie', id: /\d+/
   get 'users' => 'users#index', as: 'user'
   post 'users' => 'users#create'
+  get 'contacts' => 'contacts#index', as: 'contact'
+  get 'abouts' => 'abouts#index', as: 'about'
+  get 'login' => 'login#index', as: 'login'
+  post 'login' => 'login#authenticate', as: 'auth'
 
+  resources :charges
 
   resources :movies, only: [:index] do
     member do
@@ -23,6 +28,7 @@ Rails.application.routes.draw do
       post :show_all
       post :set_pst
       post :reset_pst
+      post :logout
     end
   end
 

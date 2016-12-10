@@ -33,6 +33,15 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise'
 
+# Stripe Gem
+gem 'stripe'
+
+# CarrierWave Gem
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+
+# attr_encrypted Gem
+gem "attr_encrypted", "~> 3.0.0"
+
 # Bootstrap Gem
 gem 'bootstrap', '~> 4.0.0.alpha5'
 
